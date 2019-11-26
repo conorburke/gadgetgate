@@ -1,0 +1,9 @@
+FROM node
+WORKDIR '/api'
+COPY ./package.json ./
+# RUN npm install -g yarn
+RUN npm install -g --unsafe-perm yarn prisma2
+COPY . .
+RUN yarn install
+# RUN prisma2 lift up; can't use this because no db connection set up yet
+CMD ["yarn", "start"]

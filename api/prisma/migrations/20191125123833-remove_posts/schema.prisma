@@ -1,0 +1,84 @@
+generator photon {
+  provider = "photonjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+model User {
+  id             String   @default(cuid()) @id
+  password_hash  String
+  email          String   @unique
+  first_name     String
+  last_name      String
+  birth_date     DateTime
+  emails         Email[]
+  phones         Phone[]
+  depots         Depot[]
+  ratings        Rating[]
+}
+
+model Email {
+  id      String  @default(cuid()) @id
+  address String
+  purpose String?
+  owner   User
+}
+
+model Phone {
+  id      String  @default(cuid()) @id
+  num     String
+  purpose String?
+  owner   User
+}
+
+model Rating {
+  id      String  @default(cuid()) @id
+  point   Int
+  type    RatingType
+  comment String?
+  user    User
+}
+
+enum RatingType {
+  Loaner
+  Renter
+}
+
+model Depot {
+  id        String  @default(cuid()) @id
+  address_1 String
+  address_2 String?
+  city      String
+  state     String
+  zipcode   String
+  owner     User
+  tools     Tool[]
+}
+
+model Tool {
+  id          String        @default(cuid()) @id
+  title       String
+  category    String
+  description String
+  price       Float
+  depot       Depot
+  pictures    ToolPicture[]
+}
+
+model ToolPicture {
+  id          String  @default(cuid()) @id
+  image       String
+  description String?
+  tool        Tool
+}
+
+model RentedTool {
+  id         String   @default(cuid()) @id
+  tool       Tool
+  renter     User
+  start_date DateTime
+  end_date   DateTime
+}

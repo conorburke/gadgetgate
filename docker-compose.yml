@@ -1,10 +1,35 @@
 version: '3'
 services:
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - /api/node_modules
+      - ./api:/api
+    # environment:
+    #   - DB_HOST=postgres
+    #   - DB_USER=postgres
+    #   - "DB_PASSWORD=${MAGNETAR_PASS}"
+    #   - DB_NAME=magnetar_dev
+    #   - PORT=7777
+    ports:
+      - 4000:4000
+    links:
+      - postgres
+    depends_on:
+      - postgres
   postgres:
     image: postgres:12.1
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     restart: always
     ports:
       - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+  postgres: 
