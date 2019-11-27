@@ -6,7 +6,7 @@ generator photon {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:postgres@postgres/postgres"
+  url = "***"
 }
 
 model User {
@@ -39,7 +39,7 @@ model Phone {
 model Rating {
   id      String  @default(cuid()) @id
   point   Int
-  kind    RatingType
+  type    RatingType
   comment String?
   user    User
 }
@@ -54,7 +54,7 @@ model Depot {
   address_1 String
   address_2 String?
   city      String
-  province     String
+  state     String
   zipcode   String
   owner     User
   tools     Tool[]

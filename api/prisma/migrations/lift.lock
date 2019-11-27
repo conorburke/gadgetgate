@@ -6,3 +6,5 @@
 20191125123226-initial_tool_schema
 20191125123538-ratings_update
 20191125123833-remove_posts
+20191126130517-birth_date_optional
+20191127023911-fix_name_conflict

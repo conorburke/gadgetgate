@@ -1,0 +1,29 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "stepType": "CreateField",
+      "model": "Rating",
+      "field": "kind",
+      "type": "RatingType",
+      "arity": "required"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Rating",
+      "field": "type"
+    },
+    {
+      "stepType": "CreateField",
+      "model": "Depot",
+      "field": "province",
+      "type": "String",
+      "arity": "required"
+    },
+    {
+      "stepType": "DeleteField",
+      "model": "Depot",
+      "field": "state"
+    }
+  ]
+}
